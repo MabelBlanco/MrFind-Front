@@ -1,0 +1,11 @@
+.inputCode {
+  width: 100px;
+  margin-top: 5%;
+  padding-top: 2%;
+}
+
+.sendInputCodeButton {
+  width: max-content;
+  padding: 2%;
+  margin-top: 5%;
+}
