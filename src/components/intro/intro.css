@@ -2,10 +2,17 @@
   width: 100px;
   margin-top: 5%;
   padding-top: 2%;
+  text-align: center;
 }
 
 .sendInputCodeButton {
   width: max-content;
   padding: 2%;
   margin-top: 5%;
+}
+
+@media screen and (min-width: 768px) {
+  .inputCode {
+    padding-bottom: 2%;
+  }
 }

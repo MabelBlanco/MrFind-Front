@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Logo.png";
 import { useState } from "react";
 import { Modal } from "../commons/modal/Modal";
 
 import "./intro.css";
+import { getPlayByCode } from "./service";
+
+const playNames = ["Cementerio", "Granada"];
 
 export function Intro() {
   const [openModal, setOpenModal] = useState(false);
   const [playCode, setPlayCode] = useState("");
+
+  const navigate = useNavigate();
 
   const openToModal = () => {
     setOpenModal(true);
@@ -15,14 +20,20 @@ export function Intro() {
 
   const closeToModal = () => {
     setOpenModal(false);
+    setPlayCode("");
   };
 
   const introduceCode = (event) => {
     setPlayCode(event.target.value);
   };
 
-  const sendCode = () => {
-    console.log(playCode);
+  const sendCode = async () => {
+    try {
+      const play = await getPlayByCode(playCode);
+      navigate(`${play.playName}?playCode=${playCode}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <header className="App-header">
