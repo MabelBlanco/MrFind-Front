@@ -1,3 +1,8 @@
+Ya hemos conectado con la BD y comprobado que el juego está asignado y existe.
+También navega automáticamente a la pantalla del juego correspondiente, una vez se ha comprobado lo anterior.
+Faltaría también montrar una pantalla u otra en función de la fase del juego.
+Manejar error en caso de que el código del juego no exista
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

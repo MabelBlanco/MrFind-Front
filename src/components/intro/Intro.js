@@ -6,11 +6,12 @@ import { Modal } from "../commons/modal/Modal";
 import "./intro.css";
 import { getPlayByCode } from "./service";
 
-const playNames = ["Cementerio", "Granada"];
+//playNames: Cementerio
 
 export function Intro() {
   const [openModal, setOpenModal] = useState(false);
   const [playCode, setPlayCode] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,18 +22,21 @@ export function Intro() {
   const closeToModal = () => {
     setOpenModal(false);
     setPlayCode("");
+    setError("");
   };
 
   const introduceCode = (event) => {
     setPlayCode(event.target.value);
   };
 
-  const sendCode = async () => {
+  const sendCode = async (event) => {
+    event.preventDefault();
+
     try {
       const play = await getPlayByCode(playCode);
-      navigate(`${play.playName}?playCode=${playCode}`);
+      navigate(`${play.playName}/playCode=${playCode}`);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
   return (
@@ -49,16 +53,23 @@ export function Intro() {
 
       {openModal && (
         <Modal closeModal={closeToModal}>
-          <div>Introduce el código del juego</div>
-          <input
-            type="text"
-            className="inputCode"
-            value={playCode}
-            onChange={introduceCode}
-          ></input>
-          <button className="sendInputCodeButton" onClick={sendCode}>
-            Enviar
-          </button>
+          <form id="introducePlayCode" onSubmit={sendCode}>
+            <label htmlFor="inputCode">Introduce el código del juego</label>
+            <input
+              type="text"
+              id="inputCode"
+              value={playCode}
+              onChange={introduceCode}
+            ></input>
+            <button
+              className="sendInputCodeButton"
+              type="submit"
+              form="introducePlayCode"
+            >
+              Enviar
+            </button>
+            <div className="error">{error}</div>
+          </form>
         </Modal>
       )}
     </header>
