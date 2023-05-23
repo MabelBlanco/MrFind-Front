@@ -5,6 +5,7 @@ import { Modal } from "../commons/modal/Modal";
 
 import "./intro.css";
 import { getPlayByCode } from "./service";
+import { Error } from "../commons/error/Error";
 
 //playNames: Cementerio
 
@@ -34,7 +35,7 @@ export function Intro() {
 
     try {
       const play = await getPlayByCode(playCode);
-      navigate(`${play.playName}/playCode=${playCode}`);
+      navigate(`${play.playName}/${playCode}`);
     } catch (error) {
       setError(error.message);
     }
@@ -68,7 +69,7 @@ export function Intro() {
             >
               Enviar
             </button>
-            <div className="error">{error}</div>
+            <Error errorMessage={error}></Error>
           </form>
         </Modal>
       )}

@@ -19,8 +19,6 @@
 }
 
 #introducePlayCode {
-  margin-top: 25%;
-  margin-bottom: 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,11 +27,5 @@
 @media screen and (min-width: 768px) {
   #inputCode {
     padding-bottom: 2%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  #introducePlayCode {
-    margin-top: 15%;
   }
 }

@@ -29,3 +29,15 @@
   position: absolute;
   right: 10px;
 }
+
+.modalChildren {
+  margin: auto;
+  margin-top: 25%;
+  margin-bottom: 15%;
+}
+
+@media screen and (min-width: 1024px) {
+  .modalChildren {
+    margin-top: 15%;
+  }
+}

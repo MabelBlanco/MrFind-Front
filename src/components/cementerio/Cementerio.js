@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPlayByCode } from "../intro/service";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Modal } from "../commons/modal/Modal";
+import { Error } from "../commons/error/Error";
 
 export function Cementerio() {
   const [phase, setPhase] = useState(1);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const playCode = useParams().playCode;
   console.log(playCode);
@@ -13,8 +18,26 @@ export function Cementerio() {
       const play = await getPlayByCode(playCode);
       setPhase(play.phase);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
-  return <div>Estás en la vista de Cementerio</div>;
+
+  const navigateToHome = () => {
+    navigate(`/`);
+  };
+
+  useEffect(() => {
+    sendCode();
+  });
+  return (
+    <>
+      {error ? (
+        <Modal closeModal={navigateToHome}>
+          <Error errorMessage={error}></Error>
+        </Modal>
+      ) : (
+        <div>Estás en la vista de Cementerio</div>
+      )}
+    </>
+  );
 }
